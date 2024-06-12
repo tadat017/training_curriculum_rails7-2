@@ -12,7 +12,7 @@ class CalendarsController < ApplicationController
     if @plan.save
     redirect_to action: :index
    else
-    getWeek
+    get_week
     render :index
    end
   end
@@ -49,20 +49,20 @@ class CalendarsController < ApplicationController
       days = { :month => (@todays_date + x).month, 
                :date => (@todays_date+x).day, 
                :plans => today_plans,
-               :wday => wdays[wday_num] 
+               :wday => wdays[wday_num] }
 
 
 
       #wday_num = (@todays_date + x).wday
       #wday_num -= 7 if wday_num >= 7
 
-      days = { 
-      month: (@todays_date + x).month, 
-      date: (@todays_date + x).day, 
-      plans: today_plans, 
+      #days = { 
+      #month: (@todays_date + x).month, 
+      #date: (@todays_date + x).day, 
+      #plans: today_plans, 
       #wday: wdays[wday_num]
 
-    }
+    #}
       @week_days.push(days)
     end
 
