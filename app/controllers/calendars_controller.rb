@@ -8,8 +8,13 @@ class CalendarsController < ApplicationController
 
   # 予定の保存
   def create
-    Plan.create(plan_params)
+    @plan = Plan.new(plan_params)
+    if @plan.save
     redirect_to action: :index
+   else
+    getWeek
+    render :index
+   end
   end
 
   private
@@ -35,6 +40,18 @@ class CalendarsController < ApplicationController
         today_plans.push(plan.plan) if plan.date == @todays_date + x
       end
 
+      wday_num = (@todays_date + x).wday
+      # wdayメソッドを用いて曜日の数値を取得
+
+      wday_num -= 7 if wday_num >= 7
+       # wday_numが7以上の場合に0から始まる数値に修正
+
+      days = { :month => (@todays_date + x).month, 
+               :date => (@todays_date+x).day, 
+               :plans => today_plans,
+               :wday => wdays[wday_num] 
+
+
 
       #wday_num = (@todays_date + x).wday
       #wday_num -= 7 if wday_num >= 7
@@ -44,6 +61,7 @@ class CalendarsController < ApplicationController
       date: (@todays_date + x).day, 
       plans: today_plans, 
       #wday: wdays[wday_num]
+
     }
       @week_days.push(days)
     end
