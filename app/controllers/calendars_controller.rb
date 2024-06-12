@@ -46,23 +46,15 @@ class CalendarsController < ApplicationController
       wday_num -= 7 if wday_num >= 7
        # wday_numが7以上の場合に0から始まる数値に修正
 
-      days = { :month => (@todays_date + x).month, 
-               :date => (@todays_date+x).day, 
-               :plans => today_plans,
-               :wday => wdays[wday_num] }
+      
 
+      days = { 
+      month: (@todays_date + x).month, 
+      date: (@todays_date + x).day, 
+      plans: today_plans, 
+      wday: wdays[wday_num]
 
-
-      #wday_num = (@todays_date + x).wday
-      #wday_num -= 7 if wday_num >= 7
-
-      #days = { 
-      #month: (@todays_date + x).month, 
-      #date: (@todays_date + x).day, 
-      #plans: today_plans, 
-      #wday: wdays[wday_num]
-
-    #}
+    }
       @week_days.push(days)
     end
 
